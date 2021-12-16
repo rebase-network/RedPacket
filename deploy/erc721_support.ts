@@ -10,6 +10,10 @@ const deployedContracts: MyMapLikeType = {
   matic_mainnet: '0xf6Dc042717EF4C097348bE00f4BaE688dcaDD4eA',
   arbitrum: '0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4',
   xdai: '0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4',
+  goerli: '0x0a04e23f95E9DB2Fe4C31252548F663fFe3AAe4d',
+  fantom: '0xF9F7C1496c21bC0180f4B64daBE0754ebFc8A8c0',
+  avalanche: '0x96c7D011cdFD467f551605f0f5Fce279F86F4186',
+  celo: '0x96c7D011cdFD467f551605f0f5Fce279F86F4186',
 }
 
 const func: DeployFunction = async function(hre: HardhatRuntimeEnvironment) {
@@ -25,10 +29,26 @@ const func: DeployFunction = async function(hre: HardhatRuntimeEnvironment) {
     const HappyRedPacketProxy_erc721 = await upgrades.deployProxy(HappyRedPacketImpl_erc721, [])
     await HappyRedPacketProxy_erc721.deployed()
     console.log('HappyRedPacketProxy_erc721: ' + HappyRedPacketProxy_erc721.address)
+
+    const admin = await upgrades.admin.getInstance();
+    const impl_addr = await admin.getProxyImplementation(HappyRedPacketProxy_erc721.address);
+    await hre.run('verify:verify', {
+        address: impl_addr,
+        constructorArguments: [],
+    });
   } else {
     // upgrade contract
     const HappyRedPacketImpl = await ethers.getContractFactory('HappyRedPacket_ERC721')
-    await upgrades.upgradeProxy(proxyAddress, HappyRedPacketImpl)
+    const instance = await upgrades.upgradeProxy(proxyAddress, HappyRedPacketImpl);
+
+    await instance.deployTransaction.wait();
+    const admin = await upgrades.admin.getInstance();
+    const impl = await admin.getProxyImplementation(proxyAddress);
+    // example: `npx hardhat verify --network rinkeby 0x8974Ce3955eE1306bA89687C558B6fC1E5be777B`
+    await hre.run('verify:verify', {
+        address: impl,
+        constructorArguments: [],
+    });
   }
 }
 

@@ -42,26 +42,35 @@ npm run deploy:ropsten
 
 ### HappyRedPacket
 
-| Chain            | Address                                                                                                                                           |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Mainnet          | [0xaBBe1101FD8fa5847c452A6D70C8655532B03C33](https://etherscan.io/address/0xaBBe1101FD8fa5847c452A6D70C8655532B03C33)                             |
-| Ropsten          | [0x0722507c3b776A6B205946592016e358B0D34c3F](https://ropsten.etherscan.io/address/0x0722507c3b776A6B205946592016e358B0D34c3F)                     |
-| BSC              | [0x0ca42C178e14c618c81B8438043F27d9D38145f6](https://bscscan.com/address/0x0ca42C178e14c618c81B8438043F27d9D38145f6)                              |
-| Matic            | [0x93e0b87A0aD0C991dc1B5176ddCD850c9a78aabb](https://polygonscan.com/address/0x93e0b87A0aD0C991dc1B5176ddCD850c9a78aabb)                          |
-| Rinkeby-Arbitrum | [0x4A77E797031257db72F7D2C3Ec08a4FAc5c8CfE9](https://rinkeby-explorer.arbitrum.io/address/0x4A77E797031257db72F7D2C3Ec08a4FAc5c8CfE9)             |
-| Arbitrum         | [0x83D6b366f21e413f214EB077D5378478e71a5eD2](https://explorer.arbitrum.io/address/0x83D6b366f21e413f214EB077D5378478e71a5eD2)                     |
-| xDai             | [0x54a0A221C25Fc0a347EC929cFC5db0be17fA2a2B](https://blockscout.com/xdai/mainnet/address/0x54a0A221C25Fc0a347EC929cFC5db0be17fA2a2B/transactions) |
+| Chain            | Address                                                                                                           |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Mainnet          | [0xaBBe1101](https://etherscan.io/address/0xaBBe1101FD8fa5847c452A6D70C8655532B03C33)                             |
+| Ropsten          | [0x0722507c](https://ropsten.etherscan.io/address/0x0722507c3b776A6B205946592016e358B0D34c3F)                     |
+| BSC              | [0x0ca42C17](https://bscscan.com/address/0x0ca42C178e14c618c81B8438043F27d9D38145f6)                              |
+| Matic            | [0x93e0b87A](https://polygonscan.com/address/0x93e0b87A0aD0C991dc1B5176ddCD850c9a78aabb)                          |
+| Rinkeby-Arbitrum | [0x4A77E797](https://rinkeby-explorer.arbitrum.io/address/0x4A77E797031257db72F7D2C3Ec08a4FAc5c8CfE9)             |
+| Arbitrum         | [0x83D6b366](https://explorer.arbitrum.io/address/0x83D6b366f21e413f214EB077D5378478e71a5eD2)                     |
+| xDai             | [0x54a0A221](https://blockscout.com/xdai/mainnet/address/0x54a0A221C25Fc0a347EC929cFC5db0be17fA2a2B/transactions) |
+| Goerli           | [0x8bF6b979](https://goerli.etherscan.io/address/0x8bF6b979286970860Adc75dc621cf1969b0bE66C)                      |
+| Fantom           | [0x578a7Fee](https://ftmscan.com/address/0x578a7Fee5f0D8CEc7d00578Bf37374C5b95C4b98)                              |
+| Avalanche        | [0xF9F7C149](https://snowtrace.io/address/0xF9F7C1496c21bC0180f4B64daBE0754ebFc8A8c0)                             |
+| Celo             | [0xab7b1be4](https://explorer.celo.org/address/0xab7b1be4233a04e5c43a810e75657eced8e5463b/transactions)           |
+
 
 ### HappyRedPacket_ERC721
 
-| Chain    | Address                                                                                                                                           |
-| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Mainnet  | [0x8d285739523FC2Ac8eC9c9C229ee863C8C9bF8C8](https://etherscan.io/address/0x8d285739523FC2Ac8eC9c9C229ee863C8C9bF8C8)                             |
-| Ropsten  | [0x8fF42e93C19E44763FD1cD07b9E04d13bA07AD3f](https://ropsten.etherscan.io/address/0x8fF42e93C19E44763FD1cD07b9E04d13bA07AD3f)                     |
-| BSC      | [0xf8968e1Fcf1440Be5Cec7Bb495bcee79753d5E06](https://bscscan.com/address/0xf8968e1Fcf1440Be5Cec7Bb495bcee79753d5E06)                              |
-| Matic    | [0xf6Dc042717EF4C097348bE00f4BaE688dcaDD4eA](https://polygonscan.com/address/0xf6Dc042717EF4C097348bE00f4BaE688dcaDD4eA)                          |
-| Arbitrum | [0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4](https://explorer.arbitrum.io/address/0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4)                     |
-| xDai     | [0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4](https://blockscout.com/xdai/mainnet/address/0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4/transactions) |
+| Chain     | Address                                                                                                           |
+| --------- | ----------------------------------------------------------------------------------------------------------------- |
+| Mainnet   | [0x8d285739](https://etherscan.io/address/0x8d285739523FC2Ac8eC9c9C229ee863C8C9bF8C8)                             |
+| Ropsten   | [0x8fF42e93](https://ropsten.etherscan.io/address/0x8fF42e93C19E44763FD1cD07b9E04d13bA07AD3f)                     |
+| BSC       | [0xf8968e1F](https://bscscan.com/address/0xf8968e1Fcf1440Be5Cec7Bb495bcee79753d5E06)                              |
+| Matic     | [0xf6Dc0427](https://polygonscan.com/address/0xf6Dc042717EF4C097348bE00f4BaE688dcaDD4eA)                          |
+| Arbitrum  | [0x561c5f3a](https://explorer.arbitrum.io/address/0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4)                     |
+| xDai      | [0x561c5f3a](https://blockscout.com/xdai/mainnet/address/0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4/transactions) |
+| Goerli    | [0x0a04e23f](https://goerli.etherscan.io/address/0x0a04e23f95E9DB2Fe4C31252548F663fFe3AAe4d)                      |
+| Fantom    | [0xF9F7C149](https://ftmscan.com/address/0xF9F7C1496c21bC0180f4B64daBE0754ebFc8A8c0)                              |
+| Avalanche | [0x96c7D011](https://snowtrace.io/address/0x96c7D011cdFD467f551605f0f5Fce279F86F4186)                             |
+| Celo      | [0x96c7D011](https://explorer.celo.org/address/0x96c7D011cdFD467f551605f0f5Fce279F86F4186/transactions)           |
 
 ## Test report
 
