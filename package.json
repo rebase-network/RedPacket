@@ -10,6 +10,8 @@
         "compile": "hardhat compile",
         "deploy:arbitrum_rinkeby": "hardhat --network arbitrum_rinkeby deploy",
         "deploy:arbitrum": "hardhat --network arbitrum deploy",
+        "deploy:optimism": "hardhat --network optimism deploy",
+        "deploy:optimism_kovan": "hardhat --network optimism_kovan deploy",
         "deploy:mainnet": "hardhat --network mainnet deploy",
         "deploy:ropsten": "hardhat --network ropsten deploy",
         "deploy:rinkeby": "hardhat --network rinkeby deploy",

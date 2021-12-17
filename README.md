@@ -55,22 +55,25 @@ npm run deploy:ropsten
 | Fantom           | [0x578a7Fee](https://ftmscan.com/address/0x578a7Fee5f0D8CEc7d00578Bf37374C5b95C4b98)                              |
 | Avalanche        | [0xF9F7C149](https://snowtrace.io/address/0xF9F7C1496c21bC0180f4B64daBE0754ebFc8A8c0)                             |
 | Celo             | [0xab7b1be4](https://explorer.celo.org/address/0xab7b1be4233a04e5c43a810e75657eced8e5463b/transactions)           |
-
+| Kovan-optimistic | [0x68EDbfA3](https://kovan-optimistic.etherscan.io/address/0x68EDbfA3E564C987FaaAB54f4FD1E7567D4151Dd)            |
+| Optimistic       | [0x981be454](https://optimistic.etherscan.io/address/0x981be454a930479d92C91a0092D204b64845A5D6)                |
 
 ### HappyRedPacket_ERC721
 
-| Chain     | Address                                                                                                           |
-| --------- | ----------------------------------------------------------------------------------------------------------------- |
-| Mainnet   | [0x8d285739](https://etherscan.io/address/0x8d285739523FC2Ac8eC9c9C229ee863C8C9bF8C8)                             |
-| Ropsten   | [0x8fF42e93](https://ropsten.etherscan.io/address/0x8fF42e93C19E44763FD1cD07b9E04d13bA07AD3f)                     |
-| BSC       | [0xf8968e1F](https://bscscan.com/address/0xf8968e1Fcf1440Be5Cec7Bb495bcee79753d5E06)                              |
-| Matic     | [0xf6Dc0427](https://polygonscan.com/address/0xf6Dc042717EF4C097348bE00f4BaE688dcaDD4eA)                          |
-| Arbitrum  | [0x561c5f3a](https://explorer.arbitrum.io/address/0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4)                     |
-| xDai      | [0x561c5f3a](https://blockscout.com/xdai/mainnet/address/0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4/transactions) |
-| Goerli    | [0x0a04e23f](https://goerli.etherscan.io/address/0x0a04e23f95E9DB2Fe4C31252548F663fFe3AAe4d)                      |
-| Fantom    | [0xF9F7C149](https://ftmscan.com/address/0xF9F7C1496c21bC0180f4B64daBE0754ebFc8A8c0)                              |
-| Avalanche | [0x96c7D011](https://snowtrace.io/address/0x96c7D011cdFD467f551605f0f5Fce279F86F4186)                             |
-| Celo      | [0x96c7D011](https://explorer.celo.org/address/0x96c7D011cdFD467f551605f0f5Fce279F86F4186/transactions)           |
+| Chain            | Address                                                                                                           |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Mainnet          | [0x8d285739](https://etherscan.io/address/0x8d285739523FC2Ac8eC9c9C229ee863C8C9bF8C8)                             |
+| Ropsten          | [0x8fF42e93](https://ropsten.etherscan.io/address/0x8fF42e93C19E44763FD1cD07b9E04d13bA07AD3f)                     |
+| BSC              | [0xf8968e1F](https://bscscan.com/address/0xf8968e1Fcf1440Be5Cec7Bb495bcee79753d5E06)                              |
+| Matic            | [0xf6Dc0427](https://polygonscan.com/address/0xf6Dc042717EF4C097348bE00f4BaE688dcaDD4eA)                          |
+| Arbitrum         | [0x561c5f3a](https://explorer.arbitrum.io/address/0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4)                     |
+| xDai             | [0x561c5f3a](https://blockscout.com/xdai/mainnet/address/0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4/transactions) |
+| Goerli           | [0x0a04e23f](https://goerli.etherscan.io/address/0x0a04e23f95E9DB2Fe4C31252548F663fFe3AAe4d)                      |
+| Fantom           | [0xF9F7C149](https://ftmscan.com/address/0xF9F7C1496c21bC0180f4B64daBE0754ebFc8A8c0)                              |
+| Avalanche        | [0x96c7D011](https://snowtrace.io/address/0x96c7D011cdFD467f551605f0f5Fce279F86F4186)                             |
+| Celo             | [0x96c7D011](https://explorer.celo.org/address/0x96c7D011cdFD467f551605f0f5Fce279F86F4186/transactions)           |
+| Kovan-optimistic | [0x556F63d7](https://kovan-optimistic.etherscan.io/address/0x556F63d7467c729034585C3e50e54e582222b491)            |
+| Optimistic       | [0x02Ea0720](https://optimistic.etherscan.io/address/0x02Ea0720254F7fa4eca7d09A1b9C783F1020EbEF)                  |
 
 ## Test report
 

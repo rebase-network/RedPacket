@@ -14,6 +14,8 @@ const deployedContracts: MyMapLikeType = {
   fantom: '0xF9F7C1496c21bC0180f4B64daBE0754ebFc8A8c0',
   avalanche: '0x96c7D011cdFD467f551605f0f5Fce279F86F4186',
   celo: '0x96c7D011cdFD467f551605f0f5Fce279F86F4186',
+  optimism: '0x02Ea0720254F7fa4eca7d09A1b9C783F1020EbEF',
+  optimism_kovan: '0x556F63d7467c729034585C3e50e54e582222b491',
 }
 
 const func: DeployFunction = async function(hre: HardhatRuntimeEnvironment) {
