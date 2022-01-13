@@ -57,6 +57,8 @@ npm run deploy:ropsten
 | Celo             | [0xab7b1be4](https://explorer.celo.org/address/0xab7b1be4233a04e5c43a810e75657eced8e5463b/transactions)           |
 | Kovan-optimistic | [0x68EDbfA3](https://kovan-optimistic.etherscan.io/address/0x68EDbfA3E564C987FaaAB54f4FD1E7567D4151Dd)            |
 | Optimistic       | [0x981be454](https://optimistic.etherscan.io/address/0x981be454a930479d92C91a0092D204b64845A5D6)                |
+| Aurora           | [0x19f179D7](https://explorer.mainnet.aurora.dev/address/0x19f179D7e0D7d9F9d5386afFF64271D98A91615B/transactions) |
+| Fuse             | [0x561c5f3a](https://explorer.fuse.io/address/0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4/transactions)            |
 
 ### HappyRedPacket_ERC721
 
@@ -74,6 +76,8 @@ npm run deploy:ropsten
 | Celo             | [0x96c7D011](https://explorer.celo.org/address/0x96c7D011cdFD467f551605f0f5Fce279F86F4186/transactions)           |
 | Kovan-optimistic | [0x556F63d7](https://kovan-optimistic.etherscan.io/address/0x556F63d7467c729034585C3e50e54e582222b491)            |
 | Optimistic       | [0x02Ea0720](https://optimistic.etherscan.io/address/0x02Ea0720254F7fa4eca7d09A1b9C783F1020EbEF)                  |
+| Aurora           | [0x05ee315E](https://explorer.mainnet.aurora.dev/address/0x05ee315E407C21a594f807D61d6CC11306D1F149/transactions) |
+| Fuse             | [0x066804d9](https://explorer.fuse.io/address/0x066804d9123bF2609Ed4A4a40b1177a9c5a9Ed51/transactions)            |
 
 ## Test report
 

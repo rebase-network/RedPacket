@@ -23,6 +23,9 @@
         "deploy:xdai": "hardhat --network xdai deploy",
         "deploy:bsc_mainnet": "hardhat --network bsc_mainnet deploy",
         "deploy:matic_mainnet": "hardhat --network matic_mainnet deploy",
+        "deploy:aurora_test": "hardhat --network aurora_test deploy",
+        "deploy:aurora": "hardhat --network aurora deploy",
+        "deploy:fuse": "hardhat --network fuse deploy",
         "test:erc721": "hardhat test ./test/TestRP_erc721.js",
         "test:normal": "hardhat test ./test/TestRedPacket.js",
         "format": "prettier --write './test/*.js' './deploy/*.ts'"
