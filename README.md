@@ -56,9 +56,10 @@ npm run deploy:ropsten
 | Avalanche        | [0xF9F7C149](https://snowtrace.io/address/0xF9F7C1496c21bC0180f4B64daBE0754ebFc8A8c0)                             |
 | Celo             | [0xab7b1be4](https://explorer.celo.org/address/0xab7b1be4233a04e5c43a810e75657eced8e5463b/transactions)           |
 | Kovan-optimistic | [0x68EDbfA3](https://kovan-optimistic.etherscan.io/address/0x68EDbfA3E564C987FaaAB54f4FD1E7567D4151Dd)            |
-| Optimistic       | [0x981be454](https://optimistic.etherscan.io/address/0x981be454a930479d92C91a0092D204b64845A5D6)                |
+| Optimistic       | [0x981be454](https://optimistic.etherscan.io/address/0x981be454a930479d92C91a0092D204b64845A5D6)                  |
 | Aurora           | [0x19f179D7](https://explorer.mainnet.aurora.dev/address/0x19f179D7e0D7d9F9d5386afFF64271D98A91615B/transactions) |
 | Fuse             | [0x561c5f3a](https://explorer.fuse.io/address/0x561c5f3a19871ecb1273D6D8eCc276BeEDa5c8b4/transactions)            |
+| Boba             | [0x578a7Fee](https://blockexplorer.boba.network/address/0x578a7Fee5f0D8CEc7d00578Bf37374C5b95C4b98/transactions)  |
 
 ### HappyRedPacket_ERC721
 
@@ -78,6 +79,7 @@ npm run deploy:ropsten
 | Optimistic       | [0x02Ea0720](https://optimistic.etherscan.io/address/0x02Ea0720254F7fa4eca7d09A1b9C783F1020EbEF)                  |
 | Aurora           | [0x05ee315E](https://explorer.mainnet.aurora.dev/address/0x05ee315E407C21a594f807D61d6CC11306D1F149/transactions) |
 | Fuse             | [0x066804d9](https://explorer.fuse.io/address/0x066804d9123bF2609Ed4A4a40b1177a9c5a9Ed51/transactions)            |
+| Boba             | [0xF9F7C149](https://blockexplorer.boba.network/address/0xF9F7C1496c21bC0180f4B64daBE0754ebFc8A8c0/transactions)  |
 
 ## Test report
 
