@@ -425,6 +425,9 @@ contract('HappyRedPacket', accounts => {
       })
       const claimResults = await getClaimRedPacketInfo(0)
       expect(claimResults[0]).to.have.property('id').that.to.be.not.null
+      const balance = await testTokenERC1155.balanceOf.call(accounts[1], 1)
+      console.log(' ========= balance: ', Number(balance))
+      expect(Number(balance)).to.be.gt(0)
     })
 
     it('should BurnToken single-token redpacket work', async () => {
