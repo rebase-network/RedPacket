@@ -4,12 +4,16 @@ const BigNumber = require('bignumber.js');
 const TestToken = artifacts.require('TestToken');
 const BurnToken = artifacts.require('BurnToken');
 const Redpacket = artifacts.require('HappyRedPacket');
+const TestTokenERC1155 = artifacts.require('TestTokenERC1155');
 
 module.exports = async () => {
 
   const amount = new BigNumber('1e27').toFixed();
   const test_token = await TestToken.new(amount);
   TestToken.setAsDeployed(test_token);
+
+  const test_token_erc1155 = await TestTokenERC1155.new(100000);
+  TestTokenERC1155.setAsDeployed(test_token_erc1155);
 
   const burn_token = await BurnToken.new(amount);
   BurnToken.setAsDeployed(burn_token);
