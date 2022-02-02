@@ -8,7 +8,6 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
-import "hardhat/console.sol";
 
 contract HappyRedPacket is Initializable, ERC1155Holder {
     using SafeMath for uint256;
@@ -129,13 +128,9 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
             // as a workaround for "CompilerError: Stack too deep, try removing local variables"
             uint256 number = _number;
             transferNFT(_erc1155TokenAddress, msg.sender, address(this), _erc1155TokenId, number);
-            received_amount = IERC1155(_erc1155TokenAddress).balanceOf(address(this), _erc1155TokenId).sub(balance_before_transfer_1155);
-            console.log(" Start**************** ");
-            console.log(balance_before_transfer_1155);
-            console.log(IERC1155(_erc1155TokenAddress).balanceOf(address(this), _erc1155TokenId));
-            console.log(" End================= ");
+            uint256 received_amount_erc1155 = IERC1155(_erc1155TokenAddress).balanceOf(address(this), _erc1155TokenId).sub(balance_before_transfer_1155);
 
-            require(received_amount == number, "#received ERC1155 != #packets");
+            require(received_amount_erc1155 == number, "#received ERC1155 != #packets");
         }
 
         bytes32 _id = keccak256(
@@ -247,8 +242,6 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
         );
         // Transfer the red packet after state changing
         // Transfer ERC1155 tokens
-        // console.log(" **************** ");
-        // console.log(IERC1155(rp.packed.erc1155TokenAddress).balanceOf(address(this), rp.packed.erc1155TokenId));
         transferNFT(rp.packed.erc1155TokenAddress, address(this), recipient, rp.packed.erc1155TokenId, 1);
         // Transfer ETH/ERC20 tokens
         if (token_type == 0) recipient.transfer(claimed_tokens);
