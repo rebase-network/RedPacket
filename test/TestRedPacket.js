@@ -29,6 +29,8 @@ contract('HappyRedPacket', accounts => {
   let redpacket
   let creationParams
 
+  const secretWordHash = web3.utils.sha3('secret')
+
   before(async () => {
     snapShot = await helper.takeSnapshot()
     snapshotId = snapShot['result']
@@ -40,7 +42,6 @@ contract('HappyRedPacket', accounts => {
 
   beforeEach(async () => {
     creationParams = {
-      public_key: public_key,
       number: 3,
       ifrandom: true,
       duration: 1000,
@@ -51,7 +52,8 @@ contract('HappyRedPacket', accounts => {
       token_addr: eth_address,
       total_tokens: 100000000,
       erc1155Address: testTokenERC1155.address,
-      erc1155TokenId: 1
+      erc1155TokenId: 1,
+      secretWordHash,
     }
     await testTokenERC1155.setApprovalForAll.sendTransaction(redpacket.address, true, { from: accounts[0] })
   })
@@ -227,7 +229,9 @@ contract('HappyRedPacket', accounts => {
         from: accounts[0],
       })
       const redPacketInfo = await getRedPacketInfo()
-      var signedMsg = web3.eth.accounts.sign(accounts[1], private_key).signature
+      // var signedMsg = web3.eth.accounts.sign(accounts[1], private_key).signature
+      const signedMsg = web3.utils.soliditySha3(secretWordHash, accounts[1])
+
       claimParams = {
         id : redPacketInfo.id,
         signedMsg,
@@ -287,7 +291,9 @@ contract('HappyRedPacket', accounts => {
         from: accounts[0],
       })
       const redPacketInfo = await getRedPacketInfo()
-      var signedMsg = web3.eth.accounts.sign(accounts[1], private_key).signature
+      // var signedMsg = web3.eth.accounts.sign(accounts[1], private_key).signature
+      const signedMsg = web3.utils.soliditySha3(secretWordHash, accounts[1])
+
       claimParams = {
         id : redPacketInfo.id,
         signedMsg,
@@ -366,8 +372,10 @@ contract('HappyRedPacket', accounts => {
       var account = web3.eth.accounts.create();
       var privateKey = account.privateKey;
       // Use wrong private key to sign on Message
-      var signedMsg = web3.eth.accounts.sign(accounts[1], privateKey).signature
-      claimParams.signedMsg = signedMsg
+      console.log('claimParams: ', claimParams)
+      const claimHash = web3.utils.soliditySha3(web3.utils.sha3('wrongsecret'), accounts[1])
+      claimParams.claimHash = claimHash
+      console.log('claimParams: ', claimParams)
       await expect(
         redpacket.claim.sendTransaction(...Object.values(claimParams), {
           from: accounts[1],
@@ -411,10 +419,12 @@ contract('HappyRedPacket', accounts => {
         from: accounts[0],
       })
       const redPacketInfo = await getRedPacketInfo()
-      var signedMsg = web3.eth.accounts.sign(accounts[1], private_key).signature
+      // var signedMsg = web3.eth.accounts.sign(accounts[1], private_key).signature
+      const signedMsg = web3.utils.soliditySha3(secretWordHash, accounts[1])
+
       claimParams = {
         id : redPacketInfo.id,
-        signedMsg: signedMsg,
+        signedMsg,
         recipient: accounts[1],
       }
       const balanceBefore = await testTokenERC1155.balanceOf.call(accounts[1], 1)
@@ -861,10 +871,13 @@ contract('HappyRedPacket', accounts => {
   }
 
   function createClaimParams(id, recipient, caller) {
-    var signedMsg = web3.eth.accounts.sign(caller, private_key).signature
+    const claimHash = web3.utils.soliditySha3(secretWordHash, caller)
+    console.log('secretWordHash: ', secretWordHash)
+    console.log('claimHash: ', claimHash)
+
     return {
       id,
-      signedMsg,
+      claimHash,
       recipient,
     }
   }

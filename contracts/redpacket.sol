@@ -15,8 +15,8 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
     struct RedPacket {
         Packed packed;
         mapping(address => uint256) claimed_list;
-        address public_key;
         address creator;
+        bytes32 secretWordHash;
     }
 
     struct Packed {
@@ -74,7 +74,6 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
     // Inits a red packet instance
     // _token_type: 0 - ETH  1 - ERC20
     function create_red_packet(
-        address _public_key,
         uint256 _number,
         bool _ifrandom,
         uint256 _duration,
@@ -85,7 +84,8 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
         address _token_addr,
         uint256 _total_tokens,
         address _erc1155TokenAddress,
-        uint256 _erc1155TokenId
+        uint256 _erc1155TokenId,
+        bytes32 _secretWordHash
     ) public payable {
         nonce++;
         require(_total_tokens >= _number, "#tokens > #packets");
@@ -139,7 +139,6 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
         {
             // as a workaround for "CompilerError: Stack too deep, try removing local variables"
             uint256 number = _number;
-            address public_key = _public_key;
             uint256 duration = _duration;
             uint256 _random_type = _ifrandom ? 1 : 0;
             RedPacket storage redp = redpacket_by_id[_id];
@@ -152,7 +151,7 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
             );
             redp.packed.erc1155TokenAddress = _erc1155TokenAddress;
             redp.packed.erc1155TokenId = _erc1155TokenId;
-            redp.public_key = public_key;
+            redp.secretWordHash = _secretWordHash;
             redp.creator = msg.sender;
         }
         {
@@ -183,9 +182,10 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
     }
 
     // It takes the signed msg.sender message as verification passcode
+    // claimHash = keccak256(abi.encodePacked((secretWordHash, msg.sender))
     function claim(
         bytes32 id,
-        bytes memory signedMsg,
+        bytes32 claimHash,
         address payable recipient
     ) public returns (uint256 claimed) {
         RedPacket storage rp = redpacket_by_id[id];
@@ -196,8 +196,7 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
         uint256 claimed_number = unbox(packed.packed2, 224, 15);
         require(claimed_number < total_number, "Out of stock");
 
-        address public_key = rp.public_key;
-        require(_verify(signedMsg, public_key), "Verification failed");
+        require(_verify(claimHash, rp.secretWordHash), "Verification failed");
 
         uint256 claimed_tokens;
         uint256 token_type = unbox(packed.packed2, 254, 1);
@@ -262,15 +261,13 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
     }
 
     // as a workaround for "CompilerError: Stack too deep, try removing local variables"
-    function _verify(bytes memory signedMsg, address public_key)
+    function _verify(bytes32 claimHash, bytes32 secretWordHash)
         private
         view
         returns (bool verified)
     {
-        bytes memory prefix = "\x19Ethereum Signed Message:\n20";
-        bytes32 prefixedHash = keccak256(abi.encodePacked(prefix, msg.sender));
-        address calculated_public_key = ECDSA.recover(prefixedHash, signedMsg);
-        return (calculated_public_key == public_key);
+        bytes32 calculatedClaimHash = keccak256(abi.encodePacked(secretWordHash, msg.sender));
+        return (claimHash == calculatedClaimHash);
     }
 
     // Returns 1. remaining value 2. total number of red packets 3. claimed number of red packets
