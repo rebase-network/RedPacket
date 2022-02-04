@@ -36,9 +36,7 @@ contract HappyRedPacketERC1155 is Initializable, ERC1155Holder {
         address token_address,
         uint256 number,
         bool ifrandom,
-        uint256 duration,
-        address erc1155TokenAddress,
-        uint256 erc1155TokenId
+        uint256 duration
     );
 
     event ClaimSuccess(
@@ -159,11 +157,10 @@ contract HappyRedPacketERC1155 is Initializable, ERC1155Holder {
             uint256 number = _number;
             bool ifrandom = _ifrandom;
             uint256 duration = _duration;
-            address erc1155TokenAddress = _erc1155TokenAddress;
             string memory message = _message;
             string memory name = _name;
             address token_addr = _token_addr;
-            uint256 erc1155TokenId = _erc1155TokenId;
+
             emit CreationSuccess(
                 received_amount,
                 _id,
@@ -174,9 +171,7 @@ contract HappyRedPacketERC1155 is Initializable, ERC1155Holder {
                 token_addr,
                 number,
                 ifrandom,
-                duration,
-                erc1155TokenAddress,
-                erc1155TokenId
+                duration
             );
         }
     }
