@@ -54,8 +54,6 @@ contract('HappyRedPacket', accounts => {
       erc1155TokenId: 1
     }
     await testTokenERC1155.setApprovalForAll.sendTransaction(redpacket.address, true, { from: accounts[0] })
-    // const approved = await testTokenERC1155.isApprovedForAll(accounts[0], redpacket.address)
-    // console.log('approved: ', approved)
   })
 
   afterEach(async () => {
@@ -199,7 +197,6 @@ contract('HappyRedPacket', accounts => {
 
     it('should return red packet info after expired', async () => {
       const { claimParams, redPacketInfo } = await createThenGetClaimParams(accounts[1])
-      console.log(' ------>>> claimParams, redPacketInfo: ', claimParams, redPacketInfo)
       await redpacket.claim.sendTransaction(...Object.values(claimParams), {
         from: accounts[1],
       })
@@ -420,14 +417,15 @@ contract('HappyRedPacket', accounts => {
         signedMsg: signedMsg,
         recipient: accounts[1],
       }
+      const balanceBefore = await testTokenERC1155.balanceOf.call(accounts[1], 1)
+      expect(Number(balanceBefore)).to.be.gt(0)
       await redpacket.claim.sendTransaction(...Object.values(claimParams), {
         from: accounts[1],
       })
       const claimResults = await getClaimRedPacketInfo(0)
       expect(claimResults[0]).to.have.property('id').that.to.be.not.null
       const balance = await testTokenERC1155.balanceOf.call(accounts[1], 1)
-      console.log(' ========= balance: ', Number(balance))
-      expect(Number(balance)).to.be.gt(0)
+      expect(Number(balance) - Number(balanceBefore)).to.be.eq(1)
     })
 
     it('should BurnToken single-token redpacket work', async () => {
@@ -663,20 +661,35 @@ contract('HappyRedPacket', accounts => {
 
     it('should refund eth successfully', async () => {
       const { claimParams, redPacketInfo } = await createThenGetClaimParams(accounts[1])
+      const balance1 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
+      console.log('1111 ========= balance1: ', Number(balance1))
+      expect(Number(balance1)).to.be.gt(0)
+
       await redpacket.claim.sendTransaction(...Object.values(claimParams), {
         from: accounts[1],
       })
 
       await helper.advanceTimeAndBlock(2000)
+      const balance2 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
+      console.log(' ========= balance2: ', Number(balance2))
+      expect(Number(balance1) - Number(balance2)).to.be.eq(1)
 
       await redpacket.refund.sendTransaction(redPacketInfo.id, {
         from: accounts[0],
       })
+      const balance3 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
+      console.log(' ========= balance3: ', Number(balance3))
+      // expect(Number(balance3)).to.be.eq(0)
+      expect(Number(balance2) - Number(balance3)).to.be.eq(2)
     })
 
     it('should refund eth successfully (not random)', async () => {
       creationParams.ifrandom = false
       const { claimParams, redPacketInfo } = await createThenGetClaimParams(accounts[1])
+      const balance1 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
+      console.log('22222 ========= balance1: ', Number(balance1))
+      expect(Number(balance1)).to.be.gt(0)
+
       await redpacket.claim.sendTransaction(...Object.values(claimParams), {
         from: accounts[1],
       })
@@ -694,6 +707,11 @@ contract('HappyRedPacket', accounts => {
         .to.have.property('token_address')
         .that.to.be.eq(eth_address)
       expect(Number(result.remaining_balance)).to.be.eq(66666667)
+
+      const balance3 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
+      console.log(' ========= balance3: ', Number(balance3))
+      // expect(Number(balance3)).to.be.eq(0)
+      expect(Number(balance1) - Number(balance3)).to.be.eq(3)
     })
 
     it('should refund erc20 successfully', async () => {
@@ -705,6 +723,10 @@ contract('HappyRedPacket', accounts => {
       await testtoken.approve.sendTransaction(redpacket.address, creationParams.total_tokens, { from: accounts[0] })
 
       const { claimParams, redPacketInfo } = await createThenGetClaimParams(accounts[1])
+      const balance1 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
+      console.log('33333 ========= balance1: ', Number(balance1))
+      expect(Number(balance1)).to.be.gt(0)
+
       await redpacket.claim.sendTransaction(...Object.values(claimParams), {
         from: accounts[1],
       })
@@ -725,12 +747,22 @@ contract('HappyRedPacket', accounts => {
 
       const allowance = await testtoken.allowance(redpacket.address, accounts[0])
       expect(Number(allowance)).to.be.eq(0)
+
+      const balance3 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
+      console.log(' ========= balance3: ', Number(balance3))
+      // expect(Number(balance3)).to.be.eq(0)
+      expect(Number(balance1) - Number(balance3)).to.be.eq(3)
     })
 
     // Note: this test spends a long time, on my machine is 10570ms
     it("should refund erc20 successfully when there're 100 red packets and 50 claimers", async () => {
       creationParams.ifrandom = false
       const { redPacketInfo } = await testSuitCreateAndClaimManyRedPackets(50)
+
+      const balance1 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
+      console.log('4444 ========= balance1: ', Number(balance1))
+      expect(Number(balance1)).to.be.gt(0)
+
       await helper.advanceTimeAndBlock(2000)
       await redpacket.refund.sendTransaction(redPacketInfo.id, {
         from: accounts[0],
@@ -746,6 +778,12 @@ contract('HappyRedPacket', accounts => {
             .toFixed(),
         )
         .and.to.be.eq(BigNumber(5e17).toFixed())
+
+      const balance3 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
+      console.log(' ========= balance3: ', Number(balance3))
+      // expect(Number(balance3)).to.be.eq(0)
+      expect(Number(balance1) - Number(balance3)).to.be.eq(50)
+
     })
   })
 
@@ -783,7 +821,6 @@ contract('HappyRedPacket', accounts => {
       address: redpacket.address,
       topic: [web3.utils.sha3(creation_success_encode)],
     })
-    console.log(' ------------> getRedPacketInfo logs: ', logs)
     return web3.eth.abi.decodeParameters(creation_success_types, logs[0].data)
   }
 
@@ -794,7 +831,6 @@ contract('HappyRedPacket', accounts => {
   async function createThenGetClaimParams(account) {
     await createRedPacket()
     const redPacketInfo = await getRedPacketInfo()
-    console.log(' ========== redPacketInfo: ', redPacketInfo)
     return { claimParams: createClaimParams(redPacketInfo.id, account, account), redPacketInfo }
   }
 
