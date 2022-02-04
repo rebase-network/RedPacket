@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 
-contract HappyRedPacket is Initializable, ERC1155Holder {
+contract HappyRedPacketERC1155 is Initializable, ERC1155Holder {
     using SafeMath for uint256;
 
     struct RedPacket {

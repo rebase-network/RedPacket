@@ -19,7 +19,7 @@ const {
 const TestToken = artifacts.require('TestToken');
 const TestTokenERC1155 = artifacts.require('TestTokenERC1155');
 const BurnToken = artifacts.require('BurnToken');
-const HappyRedPacket = artifacts.require('HappyRedPacket')
+const HappyRedPacket = artifacts.require('HappyRedPacketERC1155')
 
 contract('HappyRedPacket', accounts => {
   let snapShot
