@@ -17,13 +17,13 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
         mapping(address => uint256) claimed_list;
         address creator;
         bytes32 secretWordHash;
+        uint256 erc1155TokenId;
+        address erc1155TokenAddress;
     }
 
     struct Packed {
         uint256 packed1; // 0 (128) total_tokens (96) expire_time(32)
         uint256 packed2; // 0 (64) token_addr (160) claimed_numbers(15) total_numbers(15) token_type(1) ifrandom(1)
-        uint256 erc1155TokenId;
-        address erc1155TokenAddress;
     }
 
     event CreationSuccess(
@@ -149,8 +149,8 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
                 _token_type,
                 _random_type
             );
-            redp.packed.erc1155TokenAddress = _erc1155TokenAddress;
-            redp.packed.erc1155TokenId = _erc1155TokenId;
+            redp.erc1155TokenAddress = _erc1155TokenAddress;
+            redp.erc1155TokenId = _erc1155TokenId;
             redp.secretWordHash = _secretWordHash;
             redp.creator = msg.sender;
         }
@@ -241,7 +241,7 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
         );
         // Transfer the red packet after state changing
         // Transfer ERC1155 tokens
-        transferNFT(rp.packed.erc1155TokenAddress, address(this), recipient, rp.packed.erc1155TokenId, 1);
+        transferNFT(rp.erc1155TokenAddress, address(this), recipient, rp.erc1155TokenId, 1);
         // Transfer ETH/ERC20 tokens
         if (token_type == 0) recipient.transfer(claimed_tokens);
         else if (token_type == 1)
@@ -317,7 +317,7 @@ contract HappyRedPacket is Initializable, ERC1155Holder {
         uint256 total_number = unbox(packed.packed2, 239, 15);
         uint256 claimed_number = unbox(packed.packed2, 224, 15);
 
-        transferNFT(rp.packed.erc1155TokenAddress, address(this), msg.sender, rp.packed.erc1155TokenId, total_number - claimed_number);
+        transferNFT(rp.erc1155TokenAddress, address(this), msg.sender, rp.erc1155TokenId, total_number - claimed_number);
 
         if (token_type == 0) {
             payable(msg.sender).transfer(remaining_tokens);

@@ -372,10 +372,8 @@ contract('HappyRedPacket', accounts => {
       var account = web3.eth.accounts.create();
       var privateKey = account.privateKey;
       // Use wrong private key to sign on Message
-      console.log('claimParams: ', claimParams)
       const claimHash = web3.utils.soliditySha3(web3.utils.sha3('wrongsecret'), accounts[1])
       claimParams.claimHash = claimHash
-      console.log('claimParams: ', claimParams)
       await expect(
         redpacket.claim.sendTransaction(...Object.values(claimParams), {
           from: accounts[1],
@@ -672,7 +670,6 @@ contract('HappyRedPacket', accounts => {
     it('should refund eth successfully', async () => {
       const { claimParams, redPacketInfo } = await createThenGetClaimParams(accounts[1])
       const balance1 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
-      console.log('1111 ========= balance1: ', Number(balance1))
       expect(Number(balance1)).to.be.gt(0)
 
       await redpacket.claim.sendTransaction(...Object.values(claimParams), {
@@ -681,14 +678,12 @@ contract('HappyRedPacket', accounts => {
 
       await helper.advanceTimeAndBlock(2000)
       const balance2 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
-      console.log(' ========= balance2: ', Number(balance2))
       expect(Number(balance1) - Number(balance2)).to.be.eq(1)
 
       await redpacket.refund.sendTransaction(redPacketInfo.id, {
         from: accounts[0],
       })
       const balance3 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
-      console.log(' ========= balance3: ', Number(balance3))
       // expect(Number(balance3)).to.be.eq(0)
       expect(Number(balance2) - Number(balance3)).to.be.eq(2)
     })
@@ -697,7 +692,6 @@ contract('HappyRedPacket', accounts => {
       creationParams.ifrandom = false
       const { claimParams, redPacketInfo } = await createThenGetClaimParams(accounts[1])
       const balance1 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
-      console.log('22222 ========= balance1: ', Number(balance1))
       expect(Number(balance1)).to.be.gt(0)
 
       await redpacket.claim.sendTransaction(...Object.values(claimParams), {
@@ -719,7 +713,6 @@ contract('HappyRedPacket', accounts => {
       expect(Number(result.remaining_balance)).to.be.eq(66666667)
 
       const balance3 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
-      console.log(' ========= balance3: ', Number(balance3))
       // expect(Number(balance3)).to.be.eq(0)
       expect(Number(balance1) - Number(balance3)).to.be.eq(3)
     })
@@ -734,7 +727,6 @@ contract('HappyRedPacket', accounts => {
 
       const { claimParams, redPacketInfo } = await createThenGetClaimParams(accounts[1])
       const balance1 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
-      console.log('33333 ========= balance1: ', Number(balance1))
       expect(Number(balance1)).to.be.gt(0)
 
       await redpacket.claim.sendTransaction(...Object.values(claimParams), {
@@ -759,7 +751,6 @@ contract('HappyRedPacket', accounts => {
       expect(Number(allowance)).to.be.eq(0)
 
       const balance3 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
-      console.log(' ========= balance3: ', Number(balance3))
       // expect(Number(balance3)).to.be.eq(0)
       expect(Number(balance1) - Number(balance3)).to.be.eq(3)
     })
@@ -770,7 +761,6 @@ contract('HappyRedPacket', accounts => {
       const { redPacketInfo } = await testSuitCreateAndClaimManyRedPackets(50)
 
       const balance1 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
-      console.log('4444 ========= balance1: ', Number(balance1))
       expect(Number(balance1)).to.be.gt(0)
 
       await helper.advanceTimeAndBlock(2000)
@@ -790,7 +780,6 @@ contract('HappyRedPacket', accounts => {
         .and.to.be.eq(BigNumber(5e17).toFixed())
 
       const balance3 = await testTokenERC1155.balanceOf.call(redpacket.address, 1)
-      console.log(' ========= balance3: ', Number(balance3))
       // expect(Number(balance3)).to.be.eq(0)
       expect(Number(balance1) - Number(balance3)).to.be.eq(50)
 
@@ -872,8 +861,6 @@ contract('HappyRedPacket', accounts => {
 
   function createClaimParams(id, recipient, caller) {
     const claimHash = web3.utils.soliditySha3(secretWordHash, caller)
-    console.log('secretWordHash: ', secretWordHash)
-    console.log('claimHash: ', claimHash)
 
     return {
       id,
